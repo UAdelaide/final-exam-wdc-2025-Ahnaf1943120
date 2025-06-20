@@ -177,8 +177,7 @@ section {
 .page-title {
   color: #1877f2;
   font-size: 28px;
-  text-align: left; /* 👈 left-aligned with form */
-  margin-bottom: 1.5em;
+  text-align: left; 
   line-height: 1.3;
 }
 
