@@ -37,63 +37,62 @@
   <script>
     const { createApp } = Vue;
 
-    createApp({
-      data() {
-        return {
-          username: '',
-          password: '',
-          error: false
-        };
-      },
-      methods: {
-        async submitLogin() {
-          try {
-            const res = await fetch('/api/users/login', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              },
-              body: new URLSearchParams({
-                username: this.username,
-                password: this.password
-              })
-            });
+  createApp({
+    data() {
+      return {
+        username: '',
+        password: '',
+        error: false,
+        dogs: []
+      };
+    },
+    methods: {
+      async submitLogin() {
+        try {
+          const res = await fetch('/api/users/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+              username: this.username,
+              password: this.password
+            })
+          });
 
-            if (res.redirected) {
-              window.location.href = res.url;
-            } else {
-              this.error = true;
-            }
-          } catch (err) {
+          if (res.redirected) {
+            window.location.href = res.url;
+          } else {
             this.error = true;
           }
+        } catch (err) {
+          this.error = true;
+        }
+      },
+      async loadDogs() {
+        try {
+          const res = await fetch('api/walks/dogs');
+          const dogsData = await res.json();
+          const dogsWithPhotos = await Promise.all(
+            dogsData.map(async dog => {
+              const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
+              const imgData = await imgRes.json();
+              return {
+                ...dog,
+                photo: imgData.message
+              };
+            })
+          );
+          this.dogs = dogsWithPhotos;
+        } catch (error) {
+          console.error('Failed to load dogs:', error);
         }
       }
-    })
-    async loadDogs(){
-      try{
-        const res = await fetch('api/walks/dogs');
-        const dogsData = await res.json();
-        const dogsWithPhotos = await Promise.all(
-              dogsData.map(async dog => {
-                const imgRes = await fetch('https://dog.ceo/api/breeds/image/random');
-                const imgData = await imgRes.json();
-                return {
-                  ...dog,
-                  photo: imgData.message
-                };
-      })
-            );
-        this.dogs = dogsWithPhotos;
-      } catch (err) {
-        console.error('Failed to load dogs:', error);
-      }
+    },
+    mounted() {
+      this.loadDogs();
     }
-  },
-      mounted() {
-        this.loadDogs();
-      }
-    }).mount('#app');
+  }).mount('#app');
   </script>
 
 </body>
