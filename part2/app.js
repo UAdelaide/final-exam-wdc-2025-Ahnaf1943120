@@ -23,6 +23,8 @@ app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
 // Login route
-app.post('/login', async ( this.request, this.response) => {)
+app.post('/login', async ( req, res) => {
+    
+  const { username, password } = req.body;)
 // Export the app instead of listening here
 module.exports = app;
