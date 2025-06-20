@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Dog Walking Service</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="stylesheets/style.css">
@@ -17,8 +17,9 @@
     </h1>
 
     <form @submit.prevent="submitLogin" class="login-form">
-      <label for="username">Username</label>
-      <input type="text" id="username" v-model="username" required class="login-input" />
+    <label for="username">Username</label>
+    <input type="text" id="username" v-model="username" required class="login-input" />
+
 
       <label for="password">Password</label>
       <input type="password" id="password" v-model="password" required class="login-input" />
@@ -30,89 +31,46 @@
       </p>
     </form>
   </div>
-
-  <!-- Dog Table Below Login -->
-  <h2 style="margin-top: 40px;">All Registered Dogs</h2>
-  <table v-if="dogs.length > 0" style="width: 100%; border-collapse: collapse; background-color: white;">
-    <thead>
-      <tr style="background-color: #f0f0f0;">
-        <th>Dog ID</th>
-        <th>Name</th>
-        <th>Size</th>
-        <th>Owner</th>
-        <th>Photo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="dog in dogs" :key="dog.dog_id">
-        <td>{{ dog.dog_id }}</td>
-        <td>{{ dog.dog_name }}</td>
-        <td>{{ dog.size }}</td>
-        <td>{{ dog.owner_username }}</td>
-        <td><img :src="dog.photo" alt="dog photo" width="80" height="80" style="border-radius: 8px; object-fit: cover;"></td>
-      </tr>
-    </tbody>
-  </table>
-  <p v-else>Loading dog records...</p>
 </div>
 
-<script>
-  const { createApp } = Vue;
 
-  createApp({
-    data() {
-      return {
-        username: '',
-        password: '',
-        error: false,
-        dogs: []
-      };
-    },
-    methods: {
-      async submitLogin() {
-        try {
-          const res = await fetch('/api/users/login', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-              username: this.username,
-              password: this.password
-            })
-          });
+  <script>
+    const { createApp } = Vue;
 
-          if (res.redirected) {
-            window.location.href = res.url;
-          } else {
+    createApp({
+      data() {
+        return {
+          username: '',
+          password: '',
+          error: false
+        };
+      },
+      methods: {
+        async submitLogin() {
+          try {
+            const res = await fetch('/api/users/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: new URLSearchParams({
+                username: this.username,
+                password: this.password
+              })
+            });
+
+            if (res.redirected) {
+              window.location.href = res.url;
+            } else {
+              this.error = true;
+            }
+          } catch (err) {
             this.error = true;
           }
-        } catch (err) {
-          this.error = true;
         }
       }
-    },
-    async mounted() {
-      try {
-        const res = await fetch('/api/dogs');
-        const data = await res.json();
-
-        // Add random image to each dog
-        const dogList = await Promise.all(
-          data.map(async (dog) => {
-            const photoRes = await fetch('https://dog.ceo/api/breeds/image/random');
-            const photoData = await photoRes.json();
-            return { ...dog, photo: photoData.message };
-          })
-        );
-
-        this.dogs = dogList;
-      } catch (err) {
-        console.error('Failed to fetch dog data:', err);
-      }
-    }
-  }).mount('#app');
-</script>
+    }).mount('#app');
+  </script>
 
 </body>
 </html>
