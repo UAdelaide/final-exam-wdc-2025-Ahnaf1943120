@@ -90,7 +90,10 @@
       }
     }
   },
-    .mount('#app');
+      mounted() {
+        this.loadDogs();
+      }
+    }).mount('#app');
   </script>
 
 </body>
