@@ -156,7 +156,7 @@ section {
 }
 
 
-/* .login-container {
+.login-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -193,7 +193,7 @@ section {
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1em;
-} */
+}
 
 .login-button {
   padding: 0.8em;
