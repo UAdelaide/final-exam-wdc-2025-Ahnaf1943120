@@ -29,11 +29,39 @@
 
   <script>
     const { createApp } = Vue;
+
     createApp({
       data() {
         return {
-          message: 'Welcome to the Dog Walking Service!'
+          message: 'Welcome to the Dog Walking Service!',
+          email: '',
+          password: '',
+          error: false
         };
+      },
+      methods: {
+        async submitLogin() {
+          try {
+            const res = await fetch('/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: new URLSearchParams({
+                email: this.email,
+                password: this.password
+              })
+            });
+
+            if (res.redirected) {
+              window.location.href = res.url;
+            } else {
+              this.error = true;
+            }
+          } catch (err) {
+            this.error = true;
+          }
+        }
       }
     }).mount('#app');
   </script>
