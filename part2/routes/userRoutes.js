@@ -54,5 +54,15 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Login failed' });
   }
 });
+// Logout route: destroys session and redirects to login
+router.get('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      return res.status(500).json({ error: 'Logout failed' });
+    }
+    res.clearCookie('connect.sid'); // clear session cookie
+    res.redirect('/'); // redirect to login page
+  });
+});
 
 module.exports = router;
