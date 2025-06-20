@@ -82,6 +82,11 @@
                   ...dog,
                   photo: imgData.message
                 };
+      })
+            );
+        this.dogs = dogsWithPhotos;
+      } catch (err) {
+        console.error('Failed to load dogs:', err);
       }
     }
     .mount('#app');
