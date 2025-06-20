@@ -47,7 +47,7 @@
         const message = ref('');
         const error = ref('');
         const currentUserId = ref(null);
-
+        // Fetch the current user's ID to use in applications
         async function getCurrentUser() {
           try {
             const res = await fetch('/api/users/me');
@@ -75,7 +75,7 @@
             const res = await fetch(`/api/walks/${requestId}/apply`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ walker_id: currentUserId.value }) //
+              body: JSON.stringify({ walker_id: currentUserId.value }) // Send the current user's ID
             });
             const result = await res.json();
 
