@@ -30,15 +30,15 @@ app.post('/login', async (req, res) => {
 
   try {
     const [rows] = await db.query(
-      'SELECT user_id, username, role FROM Users WHERE username = ? AND password_hash = ?'
-      [username, password]
+      'SELECT user_id, username, role FROM Users WHERE username = ? AND password_hash = ?',
+      [username, password] // ✅ Corrected: Added comma between SQL string and parameters
     );
+
     console.log('DB rows returned:', rows);
 
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    console.log('Login request received:', email, password);
 
     req.session.user = rows[0];
 
@@ -56,7 +56,6 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
