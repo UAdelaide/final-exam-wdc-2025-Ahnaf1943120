@@ -10,25 +10,28 @@
 <body class="bg-light">
 
 <div id="app" class="login-container">
-  <h1 class="page-title">
-  Welcome to the Dog<br>
-  Walking Service!
-  </h1>
+  <div class="login-card">
+    <h1 class="page-title">
+      Welcome to the Dog<br>
+      Walking Service!
+    </h1>
 
-  <form @submit.prevent="submitLogin" class="login-form">
-    <label for="email">Username</label>
-    <input type="text" id="email" v-model="email" required class="login-input" />
+    <form @submit.prevent="submitLogin" class="login-form">
+      <label for="email">Username</label>
+      <input type="text" id="email" v-model="email" required class="login-input" />
 
-    <label for="password">Password</label>
-    <input type="password" id="password" v-model="password" required class="login-input" />
+      <label for="password">Password</label>
+      <input type="password" id="password" v-model="password" required class="login-input" />
 
-    <button type="submit" class="login-button">Log In</button>
+      <button type="submit" class="login-button">Log In</button>
 
-    <p v-if="error" class="login-error">
-      ⚠️ Invalid login. Please try again.
-    </p>
-  </form>
+      <p v-if="error" class="login-error">
+        ⚠️ Invalid login. Please try again.
+      </p>
+    </form>
+  </div>
 </div>
+
 
   <script>
     const { createApp } = Vue;
