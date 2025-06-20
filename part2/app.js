@@ -33,6 +33,7 @@ app.post('/login', async (req, res) => {
       'SELECT user_id, username, role FROM Users WHERE email = ? AND password_hash = ?',
       [email, password]
     );
+    console.log('DB rows returned:', rows);
 
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid credentials' });
