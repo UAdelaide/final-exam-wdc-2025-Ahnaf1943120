@@ -171,13 +171,13 @@ section {
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* aligns everything to the left */
+  align-items: stretch; 
 }
 
 .page-title {
   color: #1877f2;
   font-size: 28px;
-  text-align: left; 
+  text-align: left;
   line-height: 1.3;
 }
 
