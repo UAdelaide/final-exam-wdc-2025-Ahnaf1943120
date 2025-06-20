@@ -160,16 +160,17 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* 👈 pushes content to top */
+  justify-content: flex-start;
   padding: 2em;
+  background-color: #f8f9fa;
 }
 
-.login-card {
+.login-box {
   width: 100%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  align-items: stretch
+  align-items: stretch; /* aligns everything to the left */
 }
 
 .page-title {
@@ -181,9 +182,6 @@ section {
 }
 
 .login-form {
-  background-color: white;
-  padding: 2em;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
 }
