@@ -46,7 +46,7 @@
         const walks = ref([]);
         const message = ref('');
         const error = ref('');
-        const currentUserId = ref(null);
+        const currentUserId = ref(null);// Store the current user's ID
         // Fetch the current user's ID to use in applications
         async function getCurrentUser() {
           try {
@@ -90,7 +90,7 @@
         }
 
         onMounted(() => {
-          getCurrentUser();
+          getCurrentUser();// Fetch the current user's ID
           loadWalkRequests();
         });
 
