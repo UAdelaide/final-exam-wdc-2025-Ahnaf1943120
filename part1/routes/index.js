@@ -26,14 +26,9 @@ router.get('/api/walkrequests/open', async (req, res) => {
   try {
   const query =`
   SELECT
-    w.request_id,
-d.name AS dog_name,
-w.requested_time,
-w.duration_minutes, w.location, u.username AS owner_username
-  FROM
-    WalkRequests w
-  JOIN
-    Dogs d ON d.dog_id = w.dog_id
+    w.request_id, d.name AS dog_name, w.requested_time, w.duration_minutes, w.location, u.username AS owner_username
+  FROM WalkRequests w
+  JOIN Dogs d ON d.dog_id = w.dog_id
   JOIN
     Users u ON d.owner_id = u.user_id
   WHERE
