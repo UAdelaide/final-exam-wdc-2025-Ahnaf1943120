@@ -7,7 +7,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/api/dogs', async (req, res) =>  {
-  try
+  try {
+    const query =
+  }
 }
 
 
