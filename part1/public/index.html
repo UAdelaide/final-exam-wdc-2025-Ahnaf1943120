@@ -1,12 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Express</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+  <meta charset="UTF-8" />
+  <title>🐶 Woof Woof</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    /* Terrible color contrast & animations */
+    body {
+      background-color: #000;
+      color: #444;
+      font-family: Papyrus, Comic Sans MS;
+      animation: spin 5s infinite linear;
+    }
 
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .button {
+      margin-top: 50px;
+      padding: 20px;
+      background: magenta;
+      border: none;
+      font-size: 24px;
+      color: lime;
+    }
+
+    img {
+      width: 300px;
+      height: auto;
+    }
+  </style>
+</head>
 <body>
-    <h1>Express</h1>
-    <p>Welcome to Express</p>
+  <div id="app">
+    <h1>Dog of the Day (if you can find it!)</h1>
+    <button class="button" @click="fetchDog">Click Here To Get Dog</button>
+    <br><br>
+    <img :src="dogImage" alt="">
+    <p>{{ dogName }} the {{ dogBreed }} is today's dog!</p>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          dogImage: '',
+          dogName: 'Mr. Wiggles',
+          dogBreed: 'Invisible Retriever'
+        };
+      },
+      methods: {
+        async fetchDog() {
+          const res = await fetch('https://dog.ceo/api/breeds/image/random');
+          const data = await res.json();
+          this.dogImage = data.message;
+        }
+      }
+    }).mount('#app');
+  </script>
 </body>
 </html>
