@@ -132,7 +132,7 @@
         }
 
         onMounted(() => {
-          
+          loadDogs();
           loadWalks();
         });
 
@@ -141,6 +141,7 @@
           walks,
           message,
           error,
+          dogs,
           submitWalkRequest
         };
       }
