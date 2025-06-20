@@ -26,6 +26,6 @@ app.use('/api/users', userRoutes);
 app.post('/login', async ( req, res) => {
   const db = require('.models/db');
   const { email, password } = req.body;
-
+}
 // Export the app instead of listening here
 module.exports = app;
