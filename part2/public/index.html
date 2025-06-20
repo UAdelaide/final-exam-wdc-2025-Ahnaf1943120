@@ -73,7 +73,8 @@
     async loadDogs(){
       try{
         const res = await fetch('api/walks/dogs');
-        const dogs
+        const dogsData = await res.json();
+        
       }
     }
     .mount('#app');
