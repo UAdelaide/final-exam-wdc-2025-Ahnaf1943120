@@ -1,6 +1,10 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running at http://localhost:${PORT}`);
+});
 require('dotenv').config();
 
 const app = express();
@@ -26,6 +30,7 @@ app.use('/api/users', userRoutes);
 app.post('/login', async ( req, res) => {
   const db = require('.models/db');
   const { email, password } = req.body;
-}); 
+});
+
 // Export the app instead of listening here
 module.exports = app;
