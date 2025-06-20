@@ -214,3 +214,15 @@ section {
   text-align: center;
   margin-top: 1em;
 }
+.dog-table-section {
+  margin-top: 3em;
+  padding: 1em;
+  width: 100%;
+  max-width: 700px;
+}
+.dog-table-section h2 {
+  font-size: 24px;
+  color: #111;
+  margin-bottom: 1em;
+  text-align: left;
+}
