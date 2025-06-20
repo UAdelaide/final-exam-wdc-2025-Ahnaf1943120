@@ -55,7 +55,7 @@
             const user = await res.json();
             currentUserId.value = user.user_id;
           } catch (err) {
-            error.value = "Failed to fetch user data: ";
+            error.value = "Failed to fetch user data ";
           }
 
         }
