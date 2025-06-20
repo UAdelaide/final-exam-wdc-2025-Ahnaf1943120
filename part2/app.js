@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
 const app = express();
-   
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,10 +24,36 @@ app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
 // Login route
-app.post('/login', async ( req, res) => {
-  const db = require('.models/db');
+app.post('/login', async (req, res) => {
   const { email, password } = req.body;
+
+  try {
+    const [rows] = await db.query(
+      'SELECT user_id, username, role FROM Users WHERE email = ? AND password_hash = ?',
+      [email, password]
+    );
+
+    if (rows.length === 0) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    req.session.user = rows[0];
+
+    // Redirect based on role
+    if (rows[0].role === 'owner') {
+      return res.redirect('/owner-dashboard.html');
+    } else if (rows[0].role === 'walker') {
+      return res.redirect('/walker-dashboard.html');
+    } else {
+      return res.status(400).send('Unknown user role');
+    }
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
