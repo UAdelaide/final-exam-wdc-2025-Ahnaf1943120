@@ -74,4 +74,9 @@ VALUES
  ('Luna', 'medium', (SELECT user_id FROM Users WHERE username = 'carol123'));
 
 
- INSERT INTO WalkRequests (dog_id, date_time, duration, location, status) VALUES((SELECT dog_id FROM Dogs WHERE name = 'Max'), '2025-06-10 08:00:00', 30, 'Parklands', 'open'),((SELECT dog_id FROM Dogs WHERE name = 'Bella'), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted'),((SELECT dog_id FROM Dogs WHERE name = 'Rocky'), '2025-06-11 07:00:00', 60, 'Riverwalk Trail', 'open'),((SELECT dog_id FROM Dogs WHERE name = 'Daisy'), '2025-06-12 10:00:00', 30, 'Green Park', 'pending'),((SELECT dog_id FROM Dogs WHERE name = 'Luna'), '2025-06-13 17:30:00', 20, 'Maple Street', 'open');
+ INSERT INTO WalkRequests (dog_id, date_time, duration, location, status)
+VALUES
+((SELECT dog_id FROM Dogs WHERE name = 'Max'), '2025-06-10 08:00:00', 30, 'Parklands', 'open'),
+((SELECT dog_id FROM Dogs WHERE name = 'Bella'), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted'),
+((SELECT dog_id FROM Dogs WHERE name = 'Rocky'), '2025-06-11 07:00:00', 60, 'Riverwalk Trail', 'open'),
+((SELECT dog_id FROM Dogs WHERE name = 'Daisy'), '2025-06-12 10:00:00', 30, 'Green Park', 'pending'),((SELECT dog_id FROM Dogs WHERE name = 'Luna'), '2025-06-13 17:30:00', 20, 'Maple Street', 'open');
