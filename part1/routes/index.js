@@ -29,11 +29,8 @@ router.get('/api/walkrequests/open', async (req, res) => {
     w.request_id, d.name AS dog_name, w.requested_time, w.duration_minutes, w.location, u.username AS owner_username
   FROM WalkRequests w
   JOIN Dogs d ON d.dog_id = w.dog_id
-  JOIN
-    Users u ON d.owner_id = u.user_id
-  WHERE
-    w.status = 'open'
-  `;
+  JOIN Users u ON d.owner_id = u.user_id
+  WHERE w.status = 'open'`;
 
   const [requests] = await db.query(query);
 
@@ -50,8 +47,7 @@ router.get('/api/walkers/summary', async (req, res) => {
       SELECT
         u.username AS walker_username,
         COUNT(r.rating_id) AS total_ratings,
-        ROUND(AVG(r.rating), 1) AS average_rating,
-        COUNT(CASE WHEN w.status = 'completed' THEN 1 END) AS completed_walks
+        ROUND(AVG(r.rating), 1) AS average_rating, COUNT(CASE WHEN w.status = 'completed' THEN 1 END) AS completed_walks
       FROM
         Users u
       LEFT JOIN WalkApplications a ON u.user_id = a.walker_id
