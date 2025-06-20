@@ -38,7 +38,7 @@ router.get('/me', (req, res) => {
 
 // POST /api/users/login
 router.post('/login', async (req, res) => {
-  
+  // Check if user is already logged in
   const { username, password } = req.body;
 
   try {
