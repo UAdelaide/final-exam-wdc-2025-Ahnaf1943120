@@ -1,45 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>🐶 Woof Woof</title>
+  <meta charset="UTF-8">
+  <title>Dog App</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <style>
-    /* Terrible color contrast & animations */
     body {
-      background-color: #000;
-      color: #444;
-      font-family: Papyrus, Comic Sans MS;
-      animation: spin 5s infinite linear;
+      background-color: purple;
+      color: yellow;
+      font-family: cursive;
     }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .container {
+      margin: 50px;
     }
-
-    .button {
-      margin-top: 50px;
+    .btn {
+      background-color: red;
+      color: white;
       padding: 20px;
-      background: magenta;
-      border: none;
       font-size: 24px;
-      color: lime;
     }
-
     img {
-      width: 300px;
-      height: auto;
+      border: 5px dotted green;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <div id="app">
-    <h1>Dog of the Day (if you can find it!)</h1>
-    <button class="button" @click="fetchDog">Click Here To Get Dog</button>
-    <br><br>
-    <img :src="dogImage" alt="">
-    <p>{{ dogName }} the {{ dogBreed }} is today's dog!</p>
+  <div id="app" class="container">
+    <h1>Get dog picture NOW!!!</h1>
+    <button class="btn" @click="loadDog">PRESS</button>
+    <img :src="dogImage" />
+    <p>Dog Name: Woofie</p>
+    <p>Breed: Unknown</p>
   </div>
 
   <script>
@@ -48,13 +40,11 @@
     createApp({
       data() {
         return {
-          dogImage: '',
-          dogName: 'Mr. Wiggles',
-          dogBreed: 'Invisible Retriever'
+          dogImage: ''
         };
       },
       methods: {
-        async fetchDog() {
+        async loadDog() {
           const res = await fetch('https://dog.ceo/api/breeds/image/random');
           const data = await res.json();
           this.dogImage = data.message;
