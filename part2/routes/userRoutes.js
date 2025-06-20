@@ -60,9 +60,10 @@ router.get('/logout', (req, res) => {
     if (err) {
       return res.status(500).json({ error: 'Logout failed' });
     }
-    res.clearCookie('connect.sid'); 
+    res.clearCookie('connect.sid');
     res.redirect('/');
   });
 });
 
+router
 module.exports = router;
