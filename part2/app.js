@@ -23,6 +23,6 @@ app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
 
 // Login route
-app.post('/login', as)
+app.post('/login', async (req))
 // Export the app instead of listening here
 module.exports = app;
