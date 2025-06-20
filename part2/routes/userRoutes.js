@@ -42,12 +42,12 @@ router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // 
+    // QUERY the database for user credentials
     const [rows] = await db.query(
       'SELECT user_id, username, role FROM Users WHERE username = ? AND password_hash = ?',
       [username, password]
     );
-
+    
     console.log('DB rows returned:', rows);
 
     if (rows.length === 0) {
