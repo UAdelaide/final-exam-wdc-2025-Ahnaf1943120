@@ -27,11 +27,9 @@ router.get('/api/walkrequests/open', async (req, res) => {
   const query =`
   SELECT
     w.request_id,
-    d.name AS dog_name,
-    w.requested_time,
-    w.duration_minutes,
-    w.location,
-    u.username AS owner_username
+d.name AS dog_name,
+w.requested_time,
+w.duration_minutes, w.location, u.username AS owner_username
   FROM
     WalkRequests w
   JOIN
