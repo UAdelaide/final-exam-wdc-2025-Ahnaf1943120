@@ -49,6 +49,14 @@
         const currentUserId = ref(null);
 
         async function getCurrentUser() {
+          try {
+            const res = await fetch('/api/users/me');
+            if (!res.ok) throw new Error('Failed to fetch current user');
+            const user = await res.json();
+            currentUserId.value = user.id;
+          } catch (err) {
+            error.value = err.message;
+          }
 
         }
 
