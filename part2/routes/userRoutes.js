@@ -55,37 +55,7 @@ router.post('/login', async (req, res) => {
   }
 });
 // POST /api/users/login
-router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
 
-  try {
-    const [rows] = await db.query(
-      'SELECT user_id, username, role FROM Users WHERE username = ? AND password_hash = ?',
-      [username, password]
-    );
-
-    console.log('DB rows returned:', rows);
-
-    if (rows.length === 0) {
-      return res.status(401).json({ error: 'Invalid credentials' });
-    }
-
-    req.session.user = rows[0];
-
-    // Redirect based on role
-    if (rows[0].role === 'owner') {
-      return res.redirect('/owner-dashboard.html');
-    } else if (rows[0].role === 'walker') {
-      return res.redirect('/walker-dashboard.html');
-    } else {
-      return res.status(400).send('Unknown user role');
-    }
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
 
 
 // Logout route: destroys session and redirects to login
