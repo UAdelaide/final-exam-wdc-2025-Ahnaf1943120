@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('..');
+const db = require('../models/db'); // Adjust the path as necessary
 
 // GET all users (for admin/testing)
 router.get('/', async (req, res) => {
