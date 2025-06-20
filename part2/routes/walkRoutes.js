@@ -59,15 +59,16 @@ router.post('/:id/apply', async (req, res) => {
   }
 });
 
-router.get('/dogs', async (req, res) => {
+router.get('/dogs', async (req, res) =>  {
   try {
-    const query = `
-      SELECT d.dog_id, d.name, d.size, d.owner_id, u.username AS owner_username
-      FROM Dogs d
-      JOIN Users u ON d.owner_id = u.user_id
-    `;
-    const [dogs] = await db.query(query);
-    res.json(dogs);
+    const query =`
+  SELECT d.name AS dog_name, size, u.username AS owner_username
+  FROM Dogs d
+  JOIN Users u ON d.owner_id = u.user_id`;
+
+  const [dogs] = await db.query(query);
+
+  res.json(dogs);
   } catch (error) {
     console.error('Error fetching dogs:', error);
     res.status(500).json({ error: 'Internal server error' });
