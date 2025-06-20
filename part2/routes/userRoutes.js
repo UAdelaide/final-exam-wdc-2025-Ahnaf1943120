@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    
+
     res.json({ message: 'Login successful', user: rows[0] });
   } catch (error) {
     res.status(500).json({ error: 'Login failed' });
@@ -65,19 +65,5 @@ router.get('/logout', (req, res) => {
   });
 });
 
-router.get('/mydogs', async (req, res) => {
-  if (!req.session.user) {
-    return res.status(401).json({ error: 'Not logged in' });
-  }
 
-  try {
-    const [rows] = await db.query(
-      'Select dog_id, name FROM Dogs WHERE owner_id = ?',
-      [req.session.user.user_id]
-    );
-    res.json(rows);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch dogs' });
-  }
-});
 module.exports = router;
