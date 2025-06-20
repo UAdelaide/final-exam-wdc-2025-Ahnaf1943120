@@ -9,12 +9,22 @@
 </head>
 <body class="bg-light">
 
-  <div id="app" class="container py-5">
-    <h1 class="mb-4 text-primary">{{ message }}</h1>
-    <p class="lead">Connect with trusted walkers for your beloved dog!</p>
+  <div id="app" class="login-container">
+    <h1 class="page-title">{{ message }}</h1>
 
-    <a href="owner-dashboard.html" class="btn btn-outline-primary me-2">Owner Dashboard</a>
-    <a href="walker-dashboard.html" class="btn btn-outline-success">Walker Dashboard</a>
+    <form @submit.prevent="submitLogin" class="login-form">
+      <label for="email">Username</label>
+      <input type="text" id="email" v-model="email" required class="login-input" />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" v-model="password" required class="login-input" />
+
+      <button type="submit" class="login-button">Log In</button>
+
+      <p v-if="error" class="login-error">
+        ⚠️ Invalid login. Please try again.
+      </p>
+    </form>
   </div>
 
   <script>
