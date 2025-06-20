@@ -38,10 +38,11 @@ router.get('/me', (req, res) => {
 
 // POST /api/users/login
 router.post('/login', async (req, res) => {
-  // Check if user is already logged in
+  // Fetch username and password from request body
   const { username, password } = req.body;
 
   try {
+    // 
     const [rows] = await db.query(
       'SELECT user_id, username, role FROM Users WHERE username = ? AND password_hash = ?',
       [username, password]
