@@ -37,6 +37,7 @@ app.post('/login', async (req, res) => {
     if (rows.length === 0) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
+    console.log('Login request received:', email, password);
 
     req.session.user = rows[0];
 
