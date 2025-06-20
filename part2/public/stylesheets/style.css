@@ -171,7 +171,7 @@ section {
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  align-items: stretch; 
+  align-items: stretch;
 }
 
 .page-title {
@@ -213,4 +213,3 @@ section {
   color: red;
   text-align: center;
   margin-top: 1em;
-}
