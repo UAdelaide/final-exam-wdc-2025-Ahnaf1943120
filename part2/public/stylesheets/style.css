@@ -6,6 +6,8 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f8f9fa;
+
 }
 
 header {
@@ -162,7 +164,6 @@ section {
   align-items: center;
   justify-content: flex-start;
   padding: 2em;
-  background-color: #f8f9fa;
 }
 
 .login-box {
