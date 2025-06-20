@@ -59,7 +59,7 @@ router.post('/:id/apply', async (req, res) => {
   }
 });
 
-router.get('/api/dogs', async (req, res) =>  {
+router.get('/dogs', async (req, res) =>  {
   try {
     const query =`
   SELECT d.name AS dog_name, size, u.username AS owner_username
