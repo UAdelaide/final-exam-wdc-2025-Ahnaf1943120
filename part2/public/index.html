@@ -32,6 +32,30 @@
     </form>
   </div>
 </div>
+<div v-if="loggedIn" class="dogs-section">
+  <h2>All Registered Dogs</h2>
+  <table class="dogs-table">
+    <thead>
+      <tr>
+        <th>Dog ID</th>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Owner ID</th>
+        <th>Photo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="dog in dogs" :key="dog.dog_id">
+        <td>{{ dog.dog_id }}</td>
+        <td>{{ dog.name }}</td>
+        <td>{{ dog.size }}</td>
+        <td>{{ dog.owner_id }}</td>
+        <td><img :src="dog.photo" alt="dog" width="80" height="80" /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 
   <script>
