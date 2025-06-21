@@ -32,86 +32,44 @@
     </form>
   </div>
 </div>
-<div v-if="loggedIn" class="dogs-section">
-  <h2>All Registered Dogs</h2>
-  <table class="dogs-table">
-    <thead>
-      <tr>
-        <th>Dog ID</th>
-        <th>Name</th>
-        <th>Size</th>
-        <th>Owner ID</th>
-        <th>Photo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="dog in dogs" :key="dog.dog_id">
-        <td>{{ dog.dog_id }}</td>
-        <td>{{ dog.name }}</td>
-        <td>{{ dog.size }}</td>
-        <td>{{ dog.owner_id }}</td>
-        <td><img :src="dog.photo" alt="dog" width="80" height="80" /></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
 
 
   <script>
+    const { createApp } = Vue;
+
     createApp({
-  data() {
-    return {
-      username: '',
-      password: '',
-      error: false,
-      loggedIn: false,
-      dogs: []
-    };
-  },
-  methods: {
-    async submitLogin() {
-      try {
-        const res = await fetch('/api/users/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams({
-            username: this.username,
-            password: this.password
-          })
-        });
+      data() {
+        return {
+          username: '',
+          password: '',
+          error: false
+        };
+      },
+      methods: {
+        async submitLogin() {
+          try {
+            const res = await fetch('/api/users/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              body: new URLSearchParams({
+                username: this.username,
+                password: this.password
+              })
+            });
 
-        if (res.redirected) {
-          this.loggedIn = true;
-          this.error = false;
-          this.loadDogs(); // Load dogs after successful login
-        } else {
-          this.error = true;
+            if (res.redirected) {
+              window.location.href = res.url;
+            } else {
+              this.error = true;
+            }
+          } catch (err) {
+            this.error = true;
+          }
         }
-      } catch (err) {
-        this.error = true;
       }
-    },
-
-    async loadDogs() {
-      const res = await fetch('/api/dogs');
-      const data = await res.json();
-
-      const dogsWithPhotos = await Promise.all(
-        data.map(async (dog) => {
-          const photoRes = await fetch('https://dog.ceo/api/breeds/image/random');
-          const photoData = await photoRes.json();
-          return { ...dog, photo: photoData.message };
-        })
-      );
-
-      this.dogs = dogsWithPhotos;
-    }
-  }
-}).mount('#app');
-
+    }).mount('#app');
   </script>
 
 </body>
