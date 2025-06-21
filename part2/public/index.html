@@ -30,8 +30,33 @@
         Invalid login. Please try again.
       </p>
     </form>
+   </div>
+
+  <div v-if="dogs.length" style="margin-top: 2em;">
+    <h2>All Registered Dogs</h2>
+    <table class="dog-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Owner</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(dog, index) in dogs" :key="index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ dog.dog_name }}</td>
+          <td>{{ dog.size }}</td>
+          <td>{{ dog.owner_username }}</td>
+          <td><img :src="dog.photo" alt="Dog Photo" class="dog-photo" /></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
+
 
 
   <script>
