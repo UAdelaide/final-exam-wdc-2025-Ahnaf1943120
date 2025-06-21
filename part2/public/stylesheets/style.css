@@ -214,3 +214,24 @@ section {
   text-align: center;
   margin-top: 1em;
 }
+.dog-table {
+      margin-top: 2em;
+      width: 90%;
+      max-width: 800px;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+.dog-table th, .dog-table td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+.dog-table th {
+      background-color: #f2f2f2;
+    }
+.dog-photo {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
