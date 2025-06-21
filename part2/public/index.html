@@ -90,6 +90,7 @@
           this.error = true;
         }
       },
+      // Fetches all registered dogs and their photos
       async loadDogs() {
         try {
           const res = await fetch('/api/walks/dogs');
@@ -107,6 +108,7 @@
         }
       }
     },
+    // Load dogs when the component is mounted
     mounted() {
       this.loadDogs();
     }
