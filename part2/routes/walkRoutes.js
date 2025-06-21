@@ -63,10 +63,9 @@ router.post('/:id/apply', async (req, res) => {
 router.get('/dogs', async (req, res) => {
   try {
     const query = `
-      SELECT d.dog_id, d.name, d.size, d.owner_id
-      FROM Dogs d
-        JOIN
-    Users u ON d.owner_id = u.user_id`;
+  SELECT d.dog_id, d.name AS dog_name, d.size, u.username AS owner_username
+  FROM Dogs d
+  JOIN Users u ON d.owner_id = u.user_id`;
     const [dogs] = await db.query(query);
     res.json(dogs);
   } catch (error) {
